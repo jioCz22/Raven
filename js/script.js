@@ -16,15 +16,15 @@ const productos = [
         categoria: "oversize",
         imagen: "assets/playera2.png",
         descripcion: "Playera drop-shoulder negra con el logotipo gótico RAVEN en el pecho en alta densidad. Diseñada para aguantar entrenamientos extremos de fuerza."
-    },
-    {
-        id: 3,
-        nombre: "Sleeveless Distressed Mentality",
-        precio: 379,
-        categoria: "sleeveless",
-        imagen: "assets/playera-tirantes.jpg",
-        descripcion: "Playera sin mangas estilo Acid Wash gris mineral. Estampado gótico frontal y logo del cuervo circular blanco en la espalda alta."
     }
+   // {
+   //     id: 3,
+   //     nombre: "Sleeveless Distressed Mentality",
+   //     precio: 379,
+   //    categoria: "sleeveless",
+   //     imagen: "assets/playera-tirantes.jpg",
+   //     descripcion: "Playera sin mangas estilo Acid Wash gris mineral. Estampado gótico frontal y logo del cuervo circular blanco en la espalda alta."
+   // }
 ];
 
 // Inyección limpia de productos en el Catálogo Inferior
