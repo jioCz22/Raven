@@ -1,26 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAVEN</title>
+
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 <body>
 
     <header>
         <nav>
-            <h1 class="logo">RAVEN</h1>
-            
-            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-
-            <ul class="nav-links" id="nav-links">
+            <h1>RAVEN</h1>
+            <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#destacados">Destacados</a></li>
                 <li><a href="#filosofia">Filosofía</a></li>
@@ -32,39 +26,46 @@
     <section id="inicio" class="hero">
         <div class="overlay"></div>
         <div class="hero-content">
-            <h2 class="anim-titulo">DISCIPLINA<br>FUERZA<br>MENTALIDAD</h2>
-            <p class="hero-subtext">Más que ropa deportiva. Una identidad.</p>
-            <a href="#coleccion" class="btn btn-hero">Ver Colección</a>
+            <h2>DISCIPLINA<br>FUERZA<br>MENTALIDAD</h2>
+            <p>Más que ropa deportiva. Una identidad.</p>
+            <a href="#coleccion" class="btn">Ver Colección</a>
         </div>
     </section>
 
-    <section id="destacados" class="seccion-premium-full">
+    
+     <section id="destacados" class="seccion-premium-full">
+        
         <div class="liston-decorativo">
             <span>NEW ARRIVALS // DROP 01</span>
         </div>
 
         <div class="grid-layout-dos-columnas">
-            <div class="col-imagen-unica" style="background-image: url('assets/playera1.png');"></div>
+            
+            <div class="col-imagen-unica" style="background-image: url('assets/izquierdatota.png');">
+                </div>
 
             <div class="col-textos-renglones">
-                <div class="renglon-premium" style="background-image: url('assets/playera2.png');">
+                
+                <div class="renglon-premium" style="background-image: url('assets/arriba.png');">
                     <div class="sub-overlay"></div>
                     <div class="contenido-txt">
-                        <h3>METAL LOGO OVERSIZE</h3>
-                        <p>DESIGN LOGO OVERSIZE TEE // HEAVY COTTON</p>
-                        <button onclick="comprar('Metal Logo Oversize')" class="btn-shop-now">SHOP NOW</button>
+                        <h3>*********</h3>
+                        <p>********* // HEAVY COTTON</p>
+                        <button onclick="comprar('*********')" class="btn-shop-now">SHOP NOW</button>
                     </div>
                 </div>
 
-                <div class="renglon-premium" style="background-image: url('assets/playera-tirantes.jpg');">
+                <div class="renglon-premium" style="background-image: url('assets/abajo.png');">
                     <div class="sub-overlay"></div>
                     <div class="contenido-txt">
-                        <h3>DISTRESSED MENTALITY</h3>
-                        <p>ACID WASH DISTRESSED COLLECTION // PIT CREW</p>
-                        <button onclick="comprar('Sleeveless Distressed Mentality')" class="btn-shop-now">SHOP NOW</button>
+                        <h3>*********</h3>
+                        <p>********* COLLECTION // PIT CREW</p>
+                        <button onclick="comprar('*********')" class="btn-shop-now">SHOP NOW</button>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
         <div class="liston-decorativo">
@@ -83,32 +84,20 @@
 
     <section id="coleccion" class="productos">
         <h2>COLECCIÓN</h2>
-        <div class="buscador-container">
-            <input type="text" id="buscador" placeholder="Buscar producto...">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <input type="text" id="buscador" placeholder="Buscar producto..." style="padding: 12px 20px; width: 100%; max-width: 350px; background: #151515; border: 1px solid #222; color: white; border-radius: 4px; outline: none;">
         </div>
         
         <div class="grid" id="productos-grid"></div>
     </section>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <button class="cerrar-modal" onclick="cerrarModal()">&times;</button>
-            <div class="modal-body">
-                <div class="modal-img-container">
-                    <img id="modalImagen" src="" alt="Producto">
-                </div>
-                <div class="modal-info">
-                    <h3 id="modalTitulo"></h3>
-                    <p id="modalPrecio" class="modal-precio-tag"></p>
-                    <p id="modalDescripcion" class="modal-desc"></p>
-                    <button id="btnComprar" class="btn btn-modal">Ordenar por WhatsApp</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <section id="contacto" class="contacto">
+        <h2>ÚNETE AL KLAN</h2>
+    </section>
 
-    <footer class="footer-klan">
+   <footer class="footer-klan">
         <div class="footer-container">
+            
             <div class="footer-col col-marca">
                 <h2 class="footer-logo">RAVEN</h2>
                 <p class="footer-lema">FUEL THE FLIGHT. EMPOWER THE CLAN.</p>
@@ -122,7 +111,7 @@
                     <li><span class="detalle-contacto">Soporte:</span> info@ravenklan.com</li>
                 </ul>
                 <div class="instagram-link-wrapper">
-                    <a href="https://instagram.com/tu_usuario_de_ig" target="_blank" class="btn-instagram">
+                    <a href="https://www.instagram.com/ravenkklan?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn-instagram">
                         <svg viewBox="0 0 24 24" class="icon-ig">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
                         </svg>
@@ -138,6 +127,7 @@
                 </div>
                 <p class="qr-ayuda">Acceso directo al catálogo digital</p>
             </div>
+
         </div>
 
         <div class="footer-bottom">
@@ -145,7 +135,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/5218714701253" class="whatsapp-flotante" target="_blank" aria-label="Escríbenos por WhatsApp">
+    <a href="https://wa.me/5218714701253" class="whatsapp-flotante" target="_blank">
         <svg viewBox="0 0 32 32" class="icon-wa">
             <path d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-2A13 13 0 1 0 16 2zm6.7 18.5c-.3.8-1.5 1.5-2.1 1.6-.6.1-1.3.2-3.8-.8a14.4 14.4 0 0 1-6-5.3 6.6 6.6 0 0 1-1.4-3.5 3.8 3.8 0 0 1 1.2-2.9c.2-.2.4-.3.6-.3h.4c.2 0 .4 0 .5.4l.9 2.2c.1.2 0 .4-.2.6l-.5.6c-.2.2-.3.4-.1.7a10 10 0 0 0 1.8 2.3 8.3 8.3 0 0 0 2.7 1.6c.3.1.5.1.7-.1l.7-.8c.2-.2.4-.2.7-.1l2.2 1c.3.1.4.3.3.6z" fill="white"/>
         </svg>
@@ -154,3 +144,5 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+
+ 
