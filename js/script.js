@@ -143,7 +143,7 @@ window.addEventListener("click", (e) => {
 
 // WhatsApp
 function comprar(nombre) {
-    const numeroTelefono = "521XXXXXXXXXX"; // Cambia por tu número
+    const numeroTelefono = "5218714701253"; // Cambia por tu número
 
     const mensaje =
         `Hola RAVEN, me interesa adquirir la prenda de la nueva colección: ${nombre}. ¿Cómo puedo realizar mi pago?`;
@@ -209,3 +209,12 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 1200
     });
 });
+
+
+// Animación sutil de entrada para las columnas del pie de página
+    ScrollReveal().reveal('.footer-col', { 
+        distance: '30px', 
+        origin: 'bottom', 
+        duration: 1000, 
+        interval: 150 
+    });
