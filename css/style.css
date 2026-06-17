@@ -909,13 +909,14 @@ nav a:hover {
     .footer-container {
         flex-direction: row;
         align-items: flex-start;
+        flex-wrap: wrap;
         gap: 0;
     }
 
     .footer-col {
-        flex: 1;
-        padding: 0 30px;
-        margin-bottom: 0;
+        flex: 1 1 45%;
+        padding: 0 20px;
+        margin-bottom: 40px;
         border-bottom: none;
         border-right: 1px solid #111111;
     }
@@ -932,7 +933,23 @@ nav a:hover {
     .col-marca {
         padding-bottom: 0;
         border-bottom: none;
-        flex: 1.2;
+        flex: 1 1 100%;
+        border-right: none;
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #141414;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-col {
+        flex: 1;
+        margin-bottom: 0;
+    }
+    .col-marca {
+        flex: 1.1;
+        border-bottom: none;
+        padding-bottom: 0;
     }
 }
 
@@ -1499,4 +1516,436 @@ nav a:hover {
 .whatsapp-flotante:hover {
     transform: scale(1.1);
     background-color: #128c7e;
+}
+
+/* ==========================================================================
+   VIDEO DE FONDO EN HERO (con fallback automático a imagen si no carga)
+   ========================================================================== */
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Si el <video> falla o no existe el archivo, el background-image
+   del .hero-slide (definido inline) sigue ahí debajo y se ve igual */
+
+/* ==========================================================================
+   SECCIÓN "¿CÓMO COMPRAR?"
+   ========================================================================== */
+.como-comprar {
+    max-width: 1100px;
+    margin: auto;
+    padding: 100px 25px 60px;
+    text-align: center;
+}
+
+.como-comprar .seccion-encabezado h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    letter-spacing: 2px;
+}
+
+.como-comprar .seccion-encabezado p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 8px;
+    margin-bottom: 50px;
+}
+
+.pasos-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.paso-card {
+    width: 100%;
+    max-width: 320px;
+    background: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 35px 25px;
+    position: relative;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.paso-card:hover {
+    transform: translateY(-6px);
+    border-color: #B11217;
+    box-shadow: 0 15px 30px rgba(177, 18, 23, 0.18);
+}
+
+.paso-numero {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: #222;
+    letter-spacing: 1px;
+}
+
+.paso-icono {
+    font-size: 2.2rem;
+    color: #B11217;
+    margin-bottom: 18px;
+    display: block;
+}
+
+.paso-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.paso-card p {
+    font-size: 0.9rem;
+    color: #999;
+    line-height: 1.6;
+}
+
+.paso-conector {
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, #B11217, transparent);
+}
+
+@media (min-width: 900px) {
+    .pasos-grid {
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: center;
+    }
+    .paso-conector {
+        width: 50px;
+        height: 2px;
+        align-self: center;
+        background: linear-gradient(to right, #B11217, transparent);
+    }
+}
+
+/* ==========================================================================
+   LOOKBOOK
+   ========================================================================== */
+.lookbook {
+    width: 100%;
+    background: #000000;
+    padding-bottom: 4px;
+}
+
+.lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 220px);
+    gap: 4px;
+    padding: 4px;
+}
+
+.lookbook-item {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #111;
+    position: relative;
+    overflow: hidden;
+}
+
+.lookbook-grande {
+    grid-row: span 2;
+}
+
+.lookbook-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55) 100%);
+    transition: background 0.4s ease;
+}
+
+.lookbook-item:hover .lookbook-overlay {
+    background: rgba(177, 18, 23, 0.15);
+}
+
+@media (min-width: 700px) {
+    .lookbook-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 320px;
+    }
+    .lookbook-grande {
+        grid-row: span 1;
+        grid-column: span 2;
+    }
+}
+
+/* ==========================================================================
+   FILTROS DE CATEGORÍA EN COLECCIÓN
+   ========================================================================== */
+.filtros-categoria {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 45px;
+}
+
+.filtro-btn {
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    color: #999;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    padding: 10px 26px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filtro-btn:hover {
+    border-color: #B11217;
+    color: #fff;
+}
+
+.filtro-btn.activo {
+    background: #B11217;
+    border-color: #B11217;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(177, 18, 23, 0.35);
+}
+
+/* ==========================================================================
+   BOTÓN Y MODAL DE GUÍA DE TALLAS
+   ========================================================================== */
+.btn-guia-tallas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 55px auto 0;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    color: #ccc;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 14px 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-guia-tallas:hover {
+    border-color: #B11217;
+    color: #fff;
+    background: rgba(177, 18, 23, 0.08);
+}
+
+.modal-tallas-content {
+    max-width: 600px;
+    padding: 40px 35px;
+}
+
+.modal-tallas-body h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+.guia-subtexto {
+    color: #999;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.tabla-tallas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+.tabla-tallas th,
+.tabla-tallas td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #1f1f1f;
+    font-size: 0.85rem;
+}
+
+.tabla-tallas th {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1.5px;
+    color: #B11217;
+    font-size: 0.8rem;
+}
+
+.tabla-tallas td {
+    color: #ddd;
+}
+
+.tabla-tallas tbody tr:hover {
+    background: rgba(177, 18, 23, 0.06);
+}
+
+.guia-ayuda {
+    font-size: 0.8rem;
+    color: #777;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guia-ayuda i {
+    color: #B11217;
+}
+
+/* ==========================================================================
+   SELECTOR DE TALLAS EN MODAL DE PRODUCTO
+   ========================================================================== */
+.selector-tallas {
+    margin-bottom: 22px;
+}
+
+.tallas-label {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.tallas-opciones {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.talla-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 4px;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    color: #ccc;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.talla-btn:hover {
+    border-color: #B11217;
+    color: #fff;
+}
+
+.talla-btn.seleccionada {
+    background: #B11217;
+    border-color: #B11217;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(177, 18, 23, 0.4);
+}
+
+.link-guia-tallas {
+    display: inline-block;
+    font-size: 0.78rem;
+    color: #777;
+    text-decoration: underline;
+    margin-bottom: 8px;
+}
+
+.link-guia-tallas:hover {
+    color: #B11217;
+}
+
+.talla-error {
+    display: none;
+    color: #ff5b5f;
+    font-size: 0.78rem;
+    margin-top: 4px;
+}
+
+.talla-error.visible {
+    display: block;
+}
+
+/* ==========================================================================
+   TESTIMONIOS
+   ========================================================================== */
+.testimonios {
+    max-width: 1200px;
+    margin: auto;
+    padding: 80px 25px 100px;
+    text-align: center;
+}
+
+.testimonios .seccion-encabezado h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    letter-spacing: 2px;
+}
+
+.testimonios .seccion-encabezado p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 8px;
+    margin-bottom: 50px;
+}
+
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.testimonio-card {
+    background: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 32px 28px;
+    text-align: left;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.testimonio-card:hover {
+    transform: translateY(-5px);
+    border-color: #333;
+}
+
+.estrellas {
+    color: #B11217;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    letter-spacing: 3px;
+}
+
+.testimonio-texto {
+    color: #ddd;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    font-style: italic;
+}
+
+.testimonio-autor {
+    font-size: 0.75rem;
+    color: #666;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   FOOTER: columna de envíos (mismo patrón que footer-col existente)
+   ========================================================================== */
+.col-envios ul li {
+    line-height: 1.6;
 }

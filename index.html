@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAVEN</title>
-    <link rel="icon" type="image/png" href="assets/Logo.png">
+    <title>RAVEN </title>
+    <meta name="description" content="RAVEN — Ropa deportiva de disciplina y mentalidad. Oversize y sleeveless para entrenamiento extremo. Envíos a todo México.">
+
+    <!-- Favicon completo: tab, iOS, Android, PWA -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#090909">
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
@@ -24,7 +33,7 @@
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#destacados">Destacados</a></li>
-                <li><a href="#filosofia">Filosofía</a></li>
+                <li><a href="#lookbook">Lookbook</a></li>
                 <li><a href="#coleccion">Colección</a></li>
             </ul>
             <!-- Botón hamburguesa móvil -->
@@ -41,7 +50,7 @@
         <ul>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#destacados">Destacados</a></li>
-            <li><a href="#filosofia">Filosofía</a></li>
+            <li><a href="#lookbook">Lookbook</a></li>
             <li><a href="#coleccion">Colección</a></li>
         </ul>
         <span class="nav-fullscreen-footer">FUEL THE FLIGHT // EMPOWER THE CLAN</span>
@@ -51,7 +60,10 @@
 
         <!-- SLIDES -->
         <div class="hero-slider">
-            <div class="hero-slide activo" style="background-image: url(assets/.jpg);">
+            <div class="hero-slide activo" id="heroSlideVideo" style="background-image: url(assets/.jpg);">
+                <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="assets/.jpg">
+                    <source src="assets/hero-entreno.mp4" type="video/mp4">
+                </video>
                 <div class="slide-overlay"></div>
             </div>
             <div class="hero-slide" style="background-image: url(assets/.png);">
@@ -121,6 +133,35 @@
         </div>
     </section>
 
+    <section id="como-comprar" class="como-comprar">
+        <div class="seccion-encabezado">
+            <h2>¿CÓMO COMPRAR?</h2>
+            <p>Tres pasos. Sin complicaciones.</p>
+        </div>
+        <div class="pasos-grid">
+            <div class="paso-card">
+                <span class="paso-numero">01</span>
+                <i class="fa-solid fa-magnifying-glass paso-icono"></i>
+                <h3>ELIGE</h3>
+                <p>Explora la colección y selecciona tu prenda y talla.</p>
+            </div>
+            <div class="paso-conector" aria-hidden="true"></div>
+            <div class="paso-card">
+                <span class="paso-numero">02</span>
+                <i class="fa-brands fa-whatsapp paso-icono"></i>
+                <h3>ESCRÍBENOS</h3>
+                <p>Confirma tu pedido por WhatsApp con un solo toque.</p>
+            </div>
+            <div class="paso-conector" aria-hidden="true"></div>
+            <div class="paso-card">
+                <span class="paso-numero">03</span>
+                <i class="fa-solid fa-box-open paso-icono"></i>
+                <h3>RECIBE</h3>
+                <p>Coordinamos tu pago y envío. Tu pedido llega a la puerta.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="filosofia" class="filosofia">
         <h2>LA FILOSOFÍA RAVEN</h2>
         <div class="linea-decorativa"></div>
@@ -131,16 +172,94 @@
         </p>
     </section>
 
+    <!-- Temporal
+    
+    <section id="lookbook" class="lookbook">
+        <div class="liston-decorativo">
+            <span>LOOKBOOK // VIDA REAL</span>
+        </div>
+        <div class="lookbook-grid">
+            <div class="lookbook-item lookbook-grande" style="background-image: url('assets/lookbook-1.jpg');">
+                <div class="lookbook-overlay"></div>
+            </div>
+            <div class="lookbook-item" style="background-image: url('assets/lookbook-2.jpg');">
+                <div class="lookbook-overlay"></div>
+            </div>
+            <div class="lookbook-item" style="background-image: url('assets/lookbook-3.jpg');">
+                <div class="lookbook-overlay"></div>
+            </div>
+            <div class="lookbook-item" style="background-image: url('assets/lookbook-4.jpg');">
+                <div class="lookbook-overlay"></div>
+            </div>
+        </div>
+    </section>   
+    
+    -->
+
     <section id="coleccion" class="productos">
         <div class="seccion-encabezado">
             <h2>COLECCIÓN</h2>
-            <p><!--- Descripción de la colección ---></p>
+            <p>Drop 01 // Hecho para entrenar duro</p>
         </div>
         <div class="buscador-contenedor">
             <input type="text" id="buscador" placeholder="Buscar producto...">
         </div>
-        
+
+        <div class="filtros-categoria" id="filtrosCategoria">
+            <button class="filtro-btn activo" data-categoria="todos">TODOS</button>
+            <button class="filtro-btn" data-categoria="oversize">OVERSIZE</button>
+            <button class="filtro-btn" data-categoria="sleeveless">SLEEVELESS</button>
+        </div>
+
         <div class="grid" id="productos-grid"></div>
+
+        <button class="btn-guia-tallas" id="btnGuiaTallas" type="button">
+            <i class="fa-solid fa-ruler"></i> ¿Qué talla soy?
+        </button>
+    </section>
+
+    <div id="modalTallas" class="modal-overlay">
+        <div class="modal-content modal-tallas-content">
+            <span class="close-modal" onclick="cerrarModalTallas()">&times;</span>
+            <div class="modal-tallas-body">
+                <h3>GUÍA DE TALLAS</h3>
+                <p class="guia-subtexto">Medidas en centímetros. Corte oversize: si estás entre dos tallas, te recomendamos la más chica para un fit ajustado, o la más grande para un fit holgado.</p>
+                <table class="tabla-tallas">
+                    <thead>
+                        <tr>
+                            <th>Talla</th>
+                            <th>Pecho (cm)</th>
+                            <th>Largo (cm)</th>
+                            <th>Hombro a hombro (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S</td><td>104</td><td>68</td><td>54</td></tr>
+                        <tr><td>M</td><td>110</td><td>70</td><td>57</td></tr>
+                        <tr><td>L</td><td>116</td><td>72</td><td>60</td></tr>
+                        <tr><td>XL</td><td>122</td><td>74</td><td>63</td></tr>
+                    </tbody>
+                </table>
+                <p class="guia-ayuda"><i class="fa-solid fa-circle-info"></i> ¿Dudas con tu talla? Escríbenos por WhatsApp y te ayudamos.</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="testimonios" class="testimonios">
+        <div class="seccion-encabezado">
+            <h2>EL KLAN HABLA</h2>
+            <p><!--Comentario para los clientes--></p>
+        </div>
+
+    <!--COMENTARIOS DE CLIENTES-->
+        <div class="testimonios-grid">
+            <div class="testimonio-card">
+                <div class="estrellas"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonio-texto">"Se el primero en ser parte del clan"</p>
+                <span class="testimonio-autor"></span>
+            </div>
+            
+        </div>
     </section>
 
     <section id="contacto" class="contacto">
@@ -173,6 +292,15 @@
                 </div>
             </div>
 
+            <div class="footer-col col-envios">
+                <h3>ENVÍOS</h3>
+                <ul>
+                    <li><span class="detalle-contacto">Cobertura:</span> Entrega local en Torreón y envíos a todo México.</li>
+                    <li><span class="detalle-contacto">Tiempo estimado:</span> 1-2 días en Torreón // 3-6 días hábiles nacional.</li>
+                    <li><span class="detalle-contacto">Pago:</span> Se coordina directo por WhatsApp al confirmar tu pedido.</li>
+                </ul>
+            </div>
+
             <div class="footer-col col-qr">
                 <h3>ESCANEA EL KLAN</h3>
                 <div class="qr-contenedor">
@@ -183,7 +311,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 RAVEN. Hecho porJioo Cz. En Proceso.</p>
+            <p>&copy; 2026 RAVEN. Hecho por Jioo Cz. En Proceso.</p>
         </div>
     </footer>
 
@@ -198,6 +326,19 @@
                     <h3 id="modalTitulo">Producto</h3>
                     <p id="modalDescripcion" class="descripcion">Descripción</p>
                     <p id="modalPrecio" class="precio">$0 MXN</p>
+
+                    <div class="selector-tallas">
+                        <span class="tallas-label">TALLA</span>
+                        <div class="tallas-opciones" id="tallasOpciones">
+                            <button class="talla-btn" data-talla="S">S</button>
+                            <button class="talla-btn" data-talla="M">M</button>
+                            <button class="talla-btn" data-talla="L">L</button>
+                            <button class="talla-btn" data-talla="XL">XL</button>
+                        </div>
+                        <a href="#coleccion" class="link-guia-tallas" onclick="cerrarModal(); abrirModalTallas(); return false;">Ver guía de tallas</a>
+                        <p class="talla-error" id="tallaError">Selecciona una talla para continuar</p>
+                    </div>
+
                     <button id="btnComprar" class="btn-comprar">COMPRAR POR WHATSAPP</button>
                 </div>
             </div>

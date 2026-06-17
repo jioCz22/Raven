@@ -7,18 +7,21 @@ const productos = [
         categoria: "oversize",
         imagen: "assets/playera1.png",
         descripcion: "Corte Oversize pesado. Gráfico trasero premium con el círculo rojo del Klan y tipografía de caligrafía japonesa. Disciplina pura.",
-        esNuevo: true // <-- Agrega esto a los productos que quieras como nuevos
+        esNuevo: true
     },
     {
         id: 2,
-        nombre: "Metal Logo Oversize",
+        nombre: "White Raven Tank",
         precio: 399,
         categoria: "oversize",
         imagen: "assets/playera2.png",
         descripcion: "Playera drop-shoulder negra con el logotipo gótico RAVEN en el pecho en alta densidad. Diseñada para aguantar entrenamientos extremos de fuerza.",
-        esNuevo: true // <-- Agrega esto
+        esNuevo: true
     }
 ];
+
+let categoriaActiva = "todos";
+let textoBusqueda = "";
 
 // Renderizar productos
 function renderProductos(lista) {
@@ -53,18 +56,43 @@ function renderProductos(lista) {
     });
 }
 
+// Filtro combinado: categoría + texto de búsqueda
+function aplicarFiltros() {
+    const resultado = productos.filter(producto => {
+        const coincideCategoria = categoriaActiva === "todos" || producto.categoria === categoriaActiva;
+        const coincideTexto =
+            producto.nombre.toLowerCase().includes(textoBusqueda) ||
+            producto.categoria.toLowerCase().includes(textoBusqueda);
+        return coincideCategoria && coincideTexto;
+    });
+    renderProductos(resultado);
+}
+
 // Buscador
 const buscador = document.getElementById("buscador");
 if (buscador) {
     buscador.addEventListener("input", () => {
-        const texto = buscador.value.toLowerCase();
-        const resultado = productos.filter(producto =>
-            producto.nombre.toLowerCase().includes(texto) ||
-            producto.categoria.toLowerCase().includes(texto)
-        );
-        renderProductos(resultado);
+        textoBusqueda = buscador.value.toLowerCase();
+        aplicarFiltros();
     });
 }
+
+// Filtros de categoría
+const filtrosCategoria = document.getElementById("filtrosCategoria");
+if (filtrosCategoria) {
+    const botonesFiltro = filtrosCategoria.querySelectorAll(".filtro-btn");
+    botonesFiltro.forEach(btn => {
+        btn.addEventListener("click", () => {
+            botonesFiltro.forEach(b => b.classList.remove("activo"));
+            btn.classList.add("activo");
+            categoriaActiva = btn.dataset.categoria;
+            aplicarFiltros();
+        });
+    });
+}
+
+// Estado de talla seleccionada en el modal actual
+let tallaSeleccionada = null;
 
 // Abrir modal
 function abrirModal(id) {
@@ -77,9 +105,31 @@ function abrirModal(id) {
     document.getElementById("modalPrecio").textContent = `$${producto.precio} MXN`;
     document.getElementById("modalImagen").src = producto.imagen;
 
+    // Reiniciar selección de talla cada vez que se abre un producto
+    tallaSeleccionada = null;
+    const tallaError = document.getElementById("tallaError");
+    if (tallaError) tallaError.classList.remove("visible");
+
+    const botonesTalla = document.querySelectorAll("#tallasOpciones .talla-btn");
+    botonesTalla.forEach(btn => {
+        btn.classList.remove("seleccionada");
+        btn.onclick = () => {
+            botonesTalla.forEach(b => b.classList.remove("seleccionada"));
+            btn.classList.add("seleccionada");
+            tallaSeleccionada = btn.dataset.talla;
+            if (tallaError) tallaError.classList.remove("visible");
+        };
+    });
+
     const btnComprar = document.getElementById("btnComprar");
     if (btnComprar) {
-        btnComprar.onclick = () => comprar(producto.nombre);
+        btnComprar.onclick = () => {
+            if (!tallaSeleccionada) {
+                if (tallaError) tallaError.classList.add("visible");
+                return;
+            }
+            comprar(producto.nombre, tallaSeleccionada);
+        };
     }
 
     modal.classList.add("activo");
@@ -93,22 +143,60 @@ function cerrarModal() {
     }
 }
 
+// Modal de Guía de Tallas
+function abrirModalTallas() {
+    const modalTallas = document.getElementById("modalTallas");
+    if (modalTallas) modalTallas.classList.add("activo");
+}
+
+function cerrarModalTallas() {
+    const modalTallas = document.getElementById("modalTallas");
+    if (modalTallas) modalTallas.classList.remove("activo");
+}
+
+const btnGuiaTallas = document.getElementById("btnGuiaTallas");
+if (btnGuiaTallas) {
+    btnGuiaTallas.addEventListener("click", abrirModalTallas);
+}
+
 // Cerrar modal al hacer clic fuera de la caja contenedora
 window.addEventListener("click", (e) => {
     const modal = document.getElementById("modal");
+    const modalTallas = document.getElementById("modalTallas");
     if (e.target === modal) {
         cerrarModal();
     }
+    if (e.target === modalTallas) {
+        cerrarModalTallas();
+    }
 });
 
-// Redirección de compra a WhatsApp
-function comprar(nombre) {
-    const numeroTelefono = "5218714701253"; 
-    const mensaje = `Hola RAVEN, me interesa adquirir la prenda de la nueva colección: ${nombre}. ¿Cómo puedo realizar mi pago?`;
+// Redirección de compra a WhatsApp (incluye talla si se proporciona)
+function comprar(nombre, talla) {
+    const numeroTelefono = "5218714701253";
+    const mensaje = talla
+        ? `Hola RAVEN, me interesa adquirir la prenda de la nueva colección: ${nombre}, talla ${talla}. ¿Cómo puedo realizar mi pago?`
+        : `Hola RAVEN, me interesa adquirir la prenda de la nueva colección: ${nombre}. ¿Cómo puedo realizar mi pago?`;
     window.open(`https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`, "_blank");
 }
 
 // Efecto navbar al hacer scroll — SEPARADOR
+// =============================================
+// VIDEO DE FONDO EN HERO — fallback a imagen si no carga
+// =============================================
+(function () {
+    const heroVideo = document.getElementById('heroVideo');
+    if (!heroVideo) return;
+    heroVideo.addEventListener('error', () => {
+        heroVideo.style.display = 'none';
+    });
+    // Si no hay fuente válida (atributo src vacío en el <source>), también ocultar
+    const fuente = heroVideo.querySelector('source');
+    if (!fuente || !fuente.getAttribute('src')) {
+        heroVideo.style.display = 'none';
+    }
+})();
+
 // =============================================
 // HERO SLIDER — MOTOR PRINCIPAL
 // =============================================
@@ -295,7 +383,7 @@ document.addEventListener("keydown", (e) => {
 
 // Inicialización de animaciones nativas de ScrollReveal al cargar el DOM
 document.addEventListener("DOMContentLoaded", () => {
-    renderProductos(productos);
+    aplicarFiltros();
 
     if (typeof ScrollReveal !== 'undefined') {
         ScrollReveal().reveal(".anim-titulo", {
@@ -325,6 +413,26 @@ document.addEventListener("DOMContentLoaded", () => {
         ScrollReveal().reveal(".filosofia", {
             distance: "40px",
             duration: 1200
+        });
+
+        ScrollReveal().reveal(".paso-card", {
+            distance: "30px",
+            origin: "bottom",
+            duration: 900,
+            interval: 150
+        });
+
+        ScrollReveal().reveal(".lookbook-item", {
+            distance: "20px",
+            duration: 900,
+            interval: 100
+        });
+
+        ScrollReveal().reveal(".testimonio-card", {
+            distance: "30px",
+            origin: "bottom",
+            duration: 900,
+            interval: 150
         });
 
         ScrollReveal().reveal(".grid-layout-full", {
