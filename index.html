@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAVEN</title>
+    <link rel="icon" type="image/png" href="assets/Logo.png">
 
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -17,26 +18,78 @@
                 <div class="logo-icono"></div>
                 <h1>RAVEN</h1>
             </div>
+            <!-- Links desktop -->
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#destacados">Destacados</a></li>
                 <li><a href="#filosofia">Filosofía</a></li>
                 <li><a href="#coleccion">Colección</a></li>
             </ul>
+            <!-- Botón hamburguesa móvil -->
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
+    <!-- Menú fullscreen móvil -->
+    <div class="nav-fullscreen" id="navFullscreen">
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#destacados">Destacados</a></li>
+            <li><a href="#filosofia">Filosofía</a></li>
+            <li><a href="#coleccion">Colección</a></li>
+        </ul>
+        <span class="nav-fullscreen-footer">FUEL THE FLIGHT // EMPOWER THE CLAN</span>
+    </div>
+
     <section id="inicio" class="hero">
-        <div class="overlay"></div>
+
+        <!-- SLIDES -->
+        <div class="hero-slider">
+            <div class="hero-slide activo" style="background-image: url(assets/.jpg);">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url(assets/.png);">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url(assets/.png);">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url(assets/.png);">
+                <div class="slide-overlay"></div>
+            </div>
+        </div>
+
+        <!-- Contenido central -->
         <div class="hero-content">
             <h2 class="anim-titulo">DISCIPLINA<br>FUERZA<br>MENTALIDAD</h2>
             <p class="anim-subtitulo">Más que ropa deportiva. Una identidad.</p>
             <p class="hero-subtext">FUEL THE FLIGHT. EMPOWER THE CLAN.</p>
             <a href="#coleccion" class="btn btn-hero">Ver Colección</a>
         </div>
+
+        <!-- Flechas -->
+        <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="slider-btn slider-next" id="sliderNext" aria-label="Siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <!-- Dots -->
+        <div class="slider-dots" id="sliderDots"></div>
+
+        <!-- Barra de progreso -->
+        <div class="slider-progress">
+            <div class="slider-progress-bar" id="sliderProgressBar"></div>
+        </div>
+
     </section>
 
-     <section id="destacados" class="seccion-premium-full grid-layout-full">
+     <section id="destacados" class="seccion-premium-full">
         <div class="liston-decorativo" style="width: 100%; grid-column: 1/-1;">
             <span>NEW ARRIVALS // DROP 01</span>
         </div>
@@ -66,7 +119,7 @@
         </div>
 
         <div class="liston-decorativo" style="width: 100%; grid-column: 1/-1;">
-            <span>RAVEN CLAN // HARD TRAINING CO.</span>
+            <span>RAVEN CLAN // HARD TRAINING.</span>
         </div>
     </section>
 
@@ -83,7 +136,7 @@
     <section id="coleccion" class="productos">
         <div class="seccion-encabezado">
             <h2>COLECCIÓN</h2>
-            <p>Diseños exclusivos de alta densidad</p>
+            <p><!--- Descripción de la colección ---></p>
         </div>
         <div class="buscador-contenedor">
             <input type="text" id="buscador" placeholder="Buscar producto...">
@@ -132,7 +185,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 RAVEN. Hecho en México. Todos los derechos reservados.</p>
+            <p>&copy; 2026 RAVEN. Hecho - Jioo Cz. En Proceso.</p>
         </div>
     </footer>
 

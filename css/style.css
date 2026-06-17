@@ -42,20 +42,24 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 25px;
+    padding: 18px 25px;
+    position: relative;
+    z-index: 101;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
     gap: 12px;
+    z-index: 102;
+    position: relative;
 }
 
 .logo-icono {
     width: 35px;
     height: 35px;
-    background: url('../assets/logo-cuervo.png') center/cover no-repeat; 
-    background-color: #fff; 
+    background: url('../assets/logo-cuervo.png') center/cover no-repeat;
+    background-color: #fff;
     border-radius: 50%;
 }
 
@@ -66,6 +70,7 @@ nav h1 {
     color: #fff;
 }
 
+/* Links desktop */
 nav ul {
     display: flex;
     list-style: none;
@@ -85,38 +90,262 @@ nav a:hover {
     text-shadow: 0 0 8px rgba(177, 18, 23, 0.5);
 }
 
-/* --- HERO --- */
-.hero {
-    height: 100vh;
-    background: url('../assets/hero-raven.jpg') center/cover no-repeat;
+/* =============================================
+   HAMBURGER BUTTON
+   ============================================= */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 102;
+    position: relative;
+    background: none;
+    border: none;
+    padding: 6px;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                opacity   0.3s ease,
+                width     0.3s ease;
+    transform-origin: center;
+}
+
+/* Estado abierto: X */
+.hamburger.activo span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger.activo span:nth-child(2) {
+    opacity: 0;
+    width: 0;
+}
+.hamburger.activo span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* =============================================
+   MENÚ FULLSCREEN MÓVIL
+   ============================================= */
+.nav-fullscreen {
+    position: fixed;
+    inset: 0;
+    background: #060606;
+    z-index: 99;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
+    gap: 0;
+
+    /* Empieza invisible y desplazado hacia arriba */
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
     overflow: hidden;
 }
 
-.overlay {
+/* Línea roja decorativa superior del overlay */
+.nav-fullscreen::before {
+    content: '';
     position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(to right, transparent, #B11217, transparent);
+}
+
+.nav-fullscreen.activo {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Lista de links dentro del fullscreen */
+.nav-fullscreen ul {
+    list-style: none;
+    text-align: center;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), #090909 95%);
+    padding: 0 30px;
+}
+
+.nav-fullscreen ul li {
+    border-bottom: 1px solid #141414;
+    overflow: hidden;
+}
+
+.nav-fullscreen ul li:first-child {
+    border-top: 1px solid #141414;
+}
+
+/* Cada link — grande, editorial */
+.nav-fullscreen ul li a {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+    letter-spacing: 6px;
+    color: #2a2a2a;
+    text-decoration: none;
+    padding: 20px 0;
+    transition: color 0.25s ease, letter-spacing 0.25s ease;
+
+    /* Animación de entrada por ítem */
+    transform: translateY(30px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                opacity   0.4s ease,
+                color     0.25s ease;
+}
+
+.nav-fullscreen.activo ul li a {
+    transform: translateY(0);
+    opacity: 1;
+    color: #ffffff;
+}
+
+/* Delay escalonado para cada ítem */
+.nav-fullscreen.activo ul li:nth-child(1) a { transition-delay: 0.08s; }
+.nav-fullscreen.activo ul li:nth-child(2) a { transition-delay: 0.14s; }
+.nav-fullscreen.activo ul li:nth-child(3) a { transition-delay: 0.20s; }
+.nav-fullscreen.activo ul li:nth-child(4) a { transition-delay: 0.26s; }
+
+.nav-fullscreen ul li a:hover {
+    color: #B11217;
+    letter-spacing: 8px;
+}
+
+/* Lema inferior del menú */
+.nav-fullscreen-footer {
+    position: absolute;
+    bottom: 35px;
+    font-size: 0.65rem;
+    color: #222222;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* =============================================
+   RESPONSIVE: cuándo mostrar/ocultar
+   ============================================= */
+@media (max-width: 767px) {
+    /* Ocultar la nav de desktop */
+    nav > ul {
+        display: none;
+    }
+    /* Mostrar el botón hamburguesa */
+    .hamburger {
+        display: flex;
+    }
+    /* Evitar scroll del body cuando el menú está abierto */
+    body.menu-abierto {
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Ocultar todo lo del menú móvil en desktop */
+    .hamburger {
+        display: none;
+    }
+    .nav-fullscreen {
+        display: none;
+    }
+}
+
+/* =============================================
+   HERO SLIDER — CINEMATOGRÁFICO
+   ============================================= */
+.hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Pista de slides --- */
+.hero-slider {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* --- Cada slide --- */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+
+    /* Estado inicial: invisible y sin zoom */
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+/* Slide activo: aparece y hace Ken Burns */
+.hero-slide.activo {
+    opacity: 1;
+    transform: scale(1);
     z-index: 1;
 }
 
+/* Slide saliente: se va con un leve zoom out */
+.hero-slide.saliendo {
+    opacity: 0;
+    transform: scale(0.97);
+    z-index: 2; /* encima mientras desaparece */
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 1.2s ease;
+}
+
+/* Overlay oscuro en cada slide */
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.25) 50%,
+        rgba(9,9,9,0.98) 100%
+    );
+    z-index: 1;
+}
+
+/* --- Contenido (texto + botón) — siempre encima --- */
 .hero-content {
     position: relative;
     text-align: center;
-    z-index: 2;
+    z-index: 10;
     padding: 0 20px;
 }
 
+/* Título */
 .hero h2 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(3.8rem, 9vw, 6.5rem);
     line-height: 0.85;
     letter-spacing: 3px;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+    animation: heroTitleIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroTitleIn {
+    0%   { opacity: 0; transform: translateY(40px) skewY(2deg); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0)    skewY(0deg); filter: blur(0);   }
 }
 
 .hero p.anim-subtitulo {
@@ -125,12 +354,29 @@ nav a:hover {
     font-weight: 700;
     letter-spacing: 3px;
     font-size: clamp(1rem, 2vw, 1.4rem);
+    animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
 .hero-subtext {
-    color: #8a8a8a;
-    font-size: 0.95rem;
-    margin-top: 5px;
+    color: #7a7a7a;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    letter-spacing: 2px;
+    animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.btn-hero {
+    animation: btnPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.85s both;
+}
+
+@keyframes fadeSlideUp {
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes btnPop {
+    0%   { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1);   }
 }
 
 .btn {
@@ -145,12 +391,149 @@ nav a:hover {
     letter-spacing: 2px;
     font-size: 0.9rem;
     box-shadow: 0 4px 20px rgba(177, 18, 23, 0.4);
+    position: relative;
+    overflow: hidden;
 }
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::after { left: 150%; }
 
 .btn:hover {
     background: #d11921;
     transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(177, 18, 23, 0.7);
+    box-shadow: 0 8px 28px rgba(177, 18, 23, 0.65);
+}
+
+/* --- Flechas de control --- */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #ffffff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    opacity: 0;         /* ocultas por defecto */
+    pointer-events: none;
+}
+
+/* Aparecen al hacer hover en el hero */
+.hero:hover .slider-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.slider-prev { left: 20px; }
+.slider-next { right: 20px; }
+
+.slider-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: #fff;
+    stroke-width: 2;
+    fill: none;
+}
+
+.slider-btn:hover {
+    background: #B11217;
+    border-color: #B11217;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* En móvil las flechas siempre visibles */
+@media (max-width: 767px) {
+    .slider-btn {
+        opacity: 1;
+        pointer-events: auto;
+        width: 38px;
+        height: 38px;
+    }
+    .slider-prev { left: 12px; }
+    .slider-next { right: 12px; }
+}
+
+/* --- Dots de paginación --- */
+.slider-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.slider-dot.activo {
+    background: #B11217;
+    border-color: #B11217;
+    width: 24px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(177,18,23,0.7);
+}
+
+/* --- Barra de progreso inferior --- */
+.slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.06);
+    z-index: 10;
+}
+
+.slider-progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, #7A0A0D, #B11217);
+    width: 0%;
+    transition: width linear;
+    box-shadow: 0 0 8px rgba(177,18,23,0.5);
+}
+
+/* Contador de slide (esquina) */
+.slider-counter {
+    position: absolute;
+    bottom: 38px;
+    right: 25px;
+    z-index: 10;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.35);
+}
+
+.slider-counter span {
+    color: #ffffff;
+    font-size: 1.1rem;
 }
 
 /* --- FILOSOFÍA --- */
@@ -202,111 +585,7 @@ nav a:hover {
     color: #e5e5e5;
 }
 
-.grid-layout-dos-columnas {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
 
-.col-imagen-unica {
-    width: 100%;
-    height: 450px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.col-textos-renglones {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.renglon-premium {
-    width: 100%;
-    height: 350px; 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; 
-    border-bottom: 1px solid #111;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.renglon-premium:last-child {
-    border-bottom: none;
-}
-
-.sub-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.45); 
-    z-index: 1;
-    transition: background-color 0.4s ease; 
-}
-
-.renglon-premium:hover .sub-overlay {
-    background: rgba(0, 0, 0, 0.15); 
-}
-
-.contenido-txt {
-    position: relative;
-    z-index: 2;
-    text-align: left; 
-    padding: 0 40px;  
-    max-width: 85%;   
-    transition: transform 0.3s ease;
-}
-
-.renglon-premium:hover .contenido-txt {
-    transform: translateX(10px); 
-}
-
-.contenido-txt h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.4rem;
-    line-height: 0.95;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    color: #ffffff;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); 
-}
-
-.contenido-txt p {
-    font-size: 0.85rem;
-    color: #dddddd; 
-    letter-spacing: 1px;
-    margin-bottom: 22px;
-    font-weight: 400;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-}
-
-.btn-shop-now {
-    background: #7A0A0D;
-    color: #ffffff;
-    border: none;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    letter-spacing: 2px;
-    padding: 10px 35px;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.btn-shop-now:hover {
-    background: #B11217;
-    box-shadow: 0 0 15px rgba(177, 18, 23, 0.6);
-    transform: scale(1.05);
-}
 
 /* --- COLECCIÓN / PRODUCTOS --- */
 .productos {
@@ -429,119 +708,168 @@ nav a:hover {
 
 /* --- FOOTER --- */
 .footer-klan {
-    background-color: #050505;
-    border-top: 1px solid #141414;
-    padding: 80px 0 0 0;
+    background: linear-gradient(to bottom, #060606, #000000);
+    border-top: 1px solid #1a1a1a;
+    padding: 0;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Línea roja decorativa superior */
+.footer-klan::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #B11217, #7A0A0D, transparent);
 }
 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 70px 30px 50px;
     display: flex;
     flex-direction: column;
+    gap: 50px;
     width: 100%;
 }
 
+/* ---- Columna Marca ---- */
 .footer-col {
     width: 100%;
-    margin-bottom: 50px;
 }
 
 .footer-logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    letter-spacing: 5px;
+    font-size: clamp(2.5rem, 6vw, 3.8rem);
+    letter-spacing: 8px;
     color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+    line-height: 1;
+    /* Sutil efecto de brillo en el texto */
+    text-shadow: 0 0 40px rgba(177, 18, 23, 0.25);
 }
 
 .footer-lema {
-    font-size: 0.9rem;
-    color: #e5e5e5;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-    font-weight: 500;
+    font-size: 0.78rem;
+    color: #B11217;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .footer-subtext {
-    font-size: 0.75rem;
-    color: #666666;
+    font-size: 0.68rem;
+    color: #3a3a3a;
     letter-spacing: 3px;
     display: block;
+    text-transform: uppercase;
 }
 
+/* Divisor sutil debajo del logo */
+.col-marca {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #141414;
+}
+
+/* ---- Títulos de columna ---- */
 .footer-col h3 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 3px;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
     color: #ffffff;
-    margin-bottom: 25px;
-    border-left: 3px solid #7A0A0D; 
-    padding-left: 12px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
 }
 
+/* Línea roja a la izquierda del título */
+.footer-col h3::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: #B11217;
+    flex-shrink: 0;
+}
+
+/* ---- Lista de contacto ---- */
 .footer-col ul {
     list-style: none;
 }
 
 .footer-col ul li {
-    font-size: 0.85rem;
-    color: #aaa;
-    margin-bottom: 12px;
+    font-size: 0.82rem;
+    color: #666;
+    margin-bottom: 14px;
     letter-spacing: 0.5px;
+    line-height: 1.5;
 }
 
 .detalle-contacto {
-    color: #ffffff;
-    font-weight: 500;
+    color: #cccccc;
+    font-weight: 600;
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
 }
 
+/* ---- Botón Instagram ---- */
 .instagram-link-wrapper {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .btn-instagram {
     display: inline-flex;
     align-items: center;
-    background: #111111;
-    border: 1px solid #222222;
-    color: #ffffff;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    color: #aaaaaa;
     text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    padding: 12px 24px;
-    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 12px 20px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
 }
 
 .icon-ig {
-    width: 18px;
-    height: 18px;
-    fill: #ffffff;
-    margin-right: 12px;
+    width: 16px;
+    height: 16px;
+    fill: #aaaaaa;
+    flex-shrink: 0;
+    transition: fill 0.3s ease;
 }
 
 .btn-instagram:hover {
-    background: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    border-color: #E1306C;
+    color: #E1306C;
+    background: rgba(225, 48, 108, 0.06);
+    box-shadow: 0 0 18px rgba(225, 48, 108, 0.12);
 }
 
 .btn-instagram:hover .icon-ig {
-    fill: #000000;
+    fill: #E1306C;
 }
 
+/* ---- QR ---- */
 .qr-contenedor {
-    background: #ffffff; 
-    padding: 12px;
-    width: 150px;
-    height: 150px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background: #ffffff;
+    padding: 10px;
+    width: 130px;
+    height: 130px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px #1a1a1a;
 }
 
 .img-qr {
@@ -551,24 +879,57 @@ nav a:hover {
 }
 
 .qr-ayuda {
-    font-size: 0.75rem;
-    color: #666;
-    letter-spacing: 1px;
+    font-size: 0.7rem;
+    color: #3a3a3a;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
+/* ---- Footer Bottom ---- */
 .footer-bottom {
-    background: #000000;
-    border-top: 1px solid #101010;
-    padding: 25px 20px;
+    border-top: 1px solid #111111;
+    padding: 22px 20px;
     text-align: center;
-    margin-top: 40px;
     width: 100%;
 }
 
 .footer-bottom p {
-    font-size: 0.75rem;
-    color: #444444;
-    letter-spacing: 1px;
+    font-size: 0.68rem;
+    color: #333333;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ---- Layout Desktop ---- */
+@media (min-width: 768px) {
+    .footer-container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .footer-col {
+        flex: 1;
+        padding: 0 30px;
+        margin-bottom: 0;
+        border-bottom: none;
+        border-right: 1px solid #111111;
+    }
+
+    .footer-col:first-child {
+        padding-left: 0;
+    }
+
+    .footer-col:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .col-marca {
+        padding-bottom: 0;
+        border-bottom: none;
+        flex: 1.2;
+    }
 }
 
 /* --- MODAL DE DETALLES --- */
@@ -688,29 +1049,44 @@ nav a:hover {
 /* --- BOTÓN FLOTANTE WHATSAPP --- */
 .whatsapp-flotante {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366;
+    bottom: 28px;
+    right: 28px;
+    width: 58px;
+    height: 58px;
+    background: linear-gradient(145deg, #25D366, #1da851);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    box-shadow:
+        0 4px 20px rgba(37, 211, 102, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.5);
     z-index: 99;
-    animation: pulsoEfecto 2s infinite;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: pulsoEfecto 2.5s ease-in-out infinite;
 }
 
+.whatsapp-flotante:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow:
+        0 8px 28px rgba(37, 211, 102, 0.6),
+        0 4px 12px rgba(0, 0, 0, 0.5);
+    animation: none; /* Para el pulso al hacer hover */
+}
+
+/* Ícono WA: tamaño correcto y color blanco sólido */
 .icon-wa {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
+    fill: #ffffff;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
 @keyframes pulsoEfecto {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55), 0 4px 20px rgba(37,211,102,0.4); }
+    60%  { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0), 0 4px 20px rgba(37,211,102,0.4); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 4px 20px rgba(37,211,102,0.4); }
 }
 
 /* --- MEDIA QUERIES RESPONSIVAS --- */
@@ -725,14 +1101,6 @@ nav a:hover {
     .modal-info {
         width: 55%;
         padding: 45px;
-    }
-    .footer-container {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .footer-col {
-        width: 30%;
-        margin-bottom: 0;
     }
 }
 
@@ -753,4 +1121,324 @@ nav a:hover {
         height: 50%;
         padding-left: 50px; 
     }
+}
+
+
+
+/* --- NUEVA CONFIGURACIÓN DE CUADRÍCULA ESTILO NIKE --- */
+.grid {
+    display: grid;
+    /* Por defecto en celulares: 2 columnas exactas de igual tamaño */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px; /* Espacio compacto para móvil */
+    justify-content: center; 
+    width: 100%;
+}
+
+/* En tablets en adelante se expande el espacio */
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+    }
+}
+
+/* En pantallas grandes mantenemos el límite estricto de máximo 4 columnas */
+@media (min-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 35px;
+    }
+}
+
+/* --- TARJETAS ESTILO RAVEN MODIFICADAS --- */
+.card {
+    background: #0d0d0d;
+    border-radius: 8px; /* Un poco más sutil para móvil */
+    overflow: hidden;
+    border: 1px solid #1f1f1f; 
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #B11217;
+    box-shadow: 0 12px 30px rgba(177, 18, 23, 0.3);
+}
+
+/* Ajuste responsivo de la altura de imagen */
+.card-img-wrapper {
+    width: 100%;
+    height: 180px; /* Altura compacta en celular para que quepa bien el par */
+    overflow: hidden;
+    position: relative;
+    background: #050505;
+    border-bottom: 2px solid #2a0405; 
+}
+
+/* En pantallas medianas y grandes recupera su tamaño robusto */
+@media (min-width: 600px) {
+    .card-img-wrapper {
+        height: 340px;
+    }
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0%);
+}
+
+.card-info {
+    padding: 12px; /* Padding ajustado para móvil */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: linear-gradient(135deg, #0d0d0d 0%, #080808 100%);
+}
+
+@media (min-width: 600px) {
+    .card-info {
+        padding: 24px;
+    }
+}
+
+/* --- ETIQUETA ROJA "NUEVO" --- */
+.tag-nuevo {
+    color: #B11217; /* El rojo característico de RAVEN */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+@media (min-width: 600px) {
+    .tag-nuevo {
+        font-size: 0.8rem;
+        margin-bottom: 6px;
+    }
+}
+
+.card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; /* Más compacto en móvil para que no rompa filas */
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 4px;
+    line-height: 1.1;
+}
+
+@media (min-width: 600px) {
+    .card h3 {
+        font-size: 1.7rem;
+        margin-bottom: 6px;
+    }
+}
+
+.card .precio-tag {
+    color: #a0a0a0;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+@media (min-width: 600px) {
+    .card .precio-tag {
+        font-size: 1rem;
+        margin-bottom: 22px;
+        letter-spacing: 1px;
+    }
+}
+
+/* Botón de acción adaptado */
+.btn-ver {
+    width: 100%;
+    padding: 10px;
+    background: #111111;
+    color: #e5e5e5;
+    border: 1px solid #333333;
+    border-radius: 6px; 
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+@media (min-width: 600px) {
+    .btn-ver {
+        padding: 14px;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+}
+
+.btn-ver:hover {
+    background: #B11217;
+    color: #ffffff;
+    border-color: #B11217;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(177, 18, 23, 0.4);
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SECCIÓN PREMIUM / DESTACADOS — HORIZONTAL EN TODOS LOS TAMAÑOS
+   ========================================================================== */
+.seccion-premium-full {
+    width: 100%;
+    background: #000000;
+    overflow: hidden;
+}
+
+.liston-decorativo {
+    background: #090909;
+    padding: 14px 0;
+    text-align: center;
+    border-top: 1px solid #161616;
+    border-bottom: 1px solid #161616;
+}
+
+.liston-decorativo span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1rem, 4vw, 1.8rem);
+    letter-spacing: 4px;
+    color: #e5e5e5;
+}
+
+/* SIEMPRE horizontal: imagen izquierda | renglones derecha */
+.grid-layout-dos-columnas {
+    width: 100%;
+    display: flex;
+    flex-direction: row;  /* horizontal en móvil Y escritorio */
+    height: clamp(300px, 60vw, 700px); /* escala con la pantalla */
+}
+
+/* Columna izquierda: imagen principal */
+.col-imagen-unica {
+    flex: 0 0 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Columna derecha: dos renglones apilados */
+.col-textos-renglones {
+    flex: 0 0 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cada renglón ocupa la mitad del alto de la columna */
+.renglon-premium {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #111;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.renglon-premium:last-child {
+    border-bottom: none;
+}
+
+.sub-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    transition: background 0.4s ease;
+}
+
+.renglon-premium:hover .sub-overlay {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* Texto dentro de cada renglón */
+.contenido-txt {
+    position: relative;
+    z-index: 2;
+    padding: 0 clamp(14px, 3vw, 50px);
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.renglon-premium:hover .contenido-txt {
+    transform: translateX(6px);
+}
+
+.contenido-txt h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    color: #ffffff;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+
+.contenido-txt p {
+    font-size: clamp(0.65rem, 1.5vw, 0.9rem);
+    color: #cccccc;
+    margin-bottom: clamp(10px, 2vw, 20px);
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+}
+
+.btn-shop-now {
+    background: #7A0A0D;
+    color: #ffffff;
+    border: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(0.75rem, 2vw, 1.3rem);
+    letter-spacing: 1.5px;
+    padding: clamp(6px, 1.2vw, 10px) clamp(14px, 2.5vw, 35px);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.btn-shop-now:hover {
+    background: #B11217;
+    box-shadow: 0 0 15px rgba(177,18,23,0.6);
+    transform: scale(1.05);
+}
+
+
+.logo-icono {
+    width: 38px; /* Un toque más grande para notar los detalles de las plumas */
+    height: 38px;
+    /* Usamos exactamente el nombre del archivo que subiste: Logo.png */
+    background: url('../assets/Logo.png') center/contain no-repeat; 
+    border-radius: 0; /* Eliminamos el círculo blanco */
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5)); /* Le da profundidad en la barra */
 }
