@@ -46,7 +46,7 @@ function renderProductos(lista) {
                 ${etiquetaNuevo} 
                 <h3>${producto.nombre}</h3>
                 <p class="precio-tag">$${producto.precio} MXN</p>
-                <button class="btn-ver" onclick="verDetalles(${producto.id})">VER DETALLES</button>
+                <button class="btn-ver" onclick="abrirModal(${producto.id})">VER DETALLES</button>
             </div>
         `;
         grid.appendChild(card);
@@ -116,8 +116,6 @@ function comprar(nombre) {
     const slides        = document.querySelectorAll('.hero-slide');
     const dotsContainer = document.getElementById('sliderDots');
     const progressBar   = document.getElementById('sliderProgressBar');
-    const btnPrev       = document.getElementById('sliderPrev');
-    const btnNext       = document.getElementById('sliderNext');
 
     if (!slides.length) return;
 
@@ -128,7 +126,11 @@ function comprar(nombre) {
     let actual   = 0;
     let timer    = null;
     let pausado  = false;
-    let tocandoX = 0;
+
+    // Drag / swipe state
+    let dragStartX  = 0;
+    let isDragging  = false;
+    let dragMoved   = false;
 
     // Crear dots
     const dots = [];
@@ -188,19 +190,50 @@ function comprar(nombre) {
         reiniciarBarra();
     }
 
-    btnPrev?.addEventListener('click', () => { anterior(); iniciarAuto(); });
-    btnNext?.addEventListener('click', () => { siguiente(); iniciarAuto(); });
-
     const hero = document.querySelector('.hero');
-    hero?.addEventListener('mouseenter', () => { pausado = true; });
-    hero?.addEventListener('mouseleave', () => { pausado = false; });
 
-    hero?.addEventListener('touchstart', e => { tocandoX = e.touches[0].clientX; }, { passive: true });
+    // ── Touch (móvil) ──
+    hero?.addEventListener('touchstart', e => {
+        dragStartX = e.touches[0].clientX;
+        dragMoved  = false;
+    }, { passive: true });
+
+    hero?.addEventListener('touchmove', () => { dragMoved = true; }, { passive: true });
+
     hero?.addEventListener('touchend', e => {
-        const diff = tocandoX - e.changedTouches[0].clientX;
+        if (!dragMoved) return;
+        const diff = dragStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) { diff > 0 ? siguiente() : anterior(); iniciarAuto(); }
     }, { passive: true });
 
+    // ── Mouse drag (desktop) ──
+    hero?.addEventListener('mousedown', e => {
+        dragStartX = e.clientX;
+        isDragging = true;
+        dragMoved  = false;
+        hero.style.cursor = 'grabbing';
+    });
+
+    hero?.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        if (Math.abs(e.clientX - dragStartX) > 5) dragMoved = true;
+    });
+
+    hero?.addEventListener('mouseup', e => {
+        if (!isDragging) return;
+        isDragging = false;
+        hero.style.cursor = '';
+        if (!dragMoved) return;
+        const diff = dragStartX - e.clientX;
+        if (Math.abs(diff) > 50) { diff > 0 ? siguiente() : anterior(); iniciarAuto(); }
+    });
+
+    hero?.addEventListener('mouseleave', () => {
+        isDragging = false;
+        hero.style.cursor = '';
+    });
+
+    // ── Teclado ──
     document.addEventListener('keydown', e => {
         if (e.key === 'ArrowRight') { siguiente(); iniciarAuto(); }
         if (e.key === 'ArrowLeft')  { anterior();  iniciarAuto(); }

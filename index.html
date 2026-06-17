@@ -73,13 +73,9 @@
             <a href="#coleccion" class="btn btn-hero">Ver Colección</a>
         </div>
 
-        <!-- Flechas -->
-        <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="slider-btn slider-next" id="sliderNext" aria-label="Siguiente">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
+        <!-- Flechas ocultas (navegación por drag/swipe y teclado) -->
+        <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Anterior" style="display:none;"></button>
+        <button class="slider-btn slider-next" id="sliderNext" aria-label="Siguiente" style="display:none;"></button>
 
         <!-- Dots -->
         <div class="slider-dots" id="sliderDots"></div>
