@@ -1442,3 +1442,57 @@ nav a:hover {
     border-radius: 0; /* Eliminamos el círculo blanco */
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5)); /* Le da profundidad en la barra */
 }
+
+
+
+.whatsapp-flotante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 35px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-flotante:hover {
+    transform: scale(1.1);
+    background-color: #20ba5a;
+    color: white;
+}
+
+/* Botón flotante de WhatsApp */
+.whatsapp-flotante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: white !important; /* Fuerza el color blanco del icono */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 35px;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
+    z-index: 9999; /* Asegura que esté por encima de todo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-flotante:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+}
