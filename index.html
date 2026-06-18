@@ -14,10 +14,11 @@
     <link rel="manifest" href="site.webmanifest">
     <meta name="theme-color" content="#090909">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="css/style.css">
+    <!-- ► NUEVO: estilos extras v2 -->
+    <link rel="stylesheet" href="css/raven-extras.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
 </head>
@@ -35,6 +36,7 @@
                 <li><a href="#destacados">Destacados</a></li>
                 <li><a href="#lookbook">Lookbook</a></li>
                 <li><a href="#coleccion">Colección</a></li>
+                <li><a href="#contacto">Contacto</a></li>
             </ul>
             <!-- Botón hamburguesa móvil -->
             <button class="hamburger" id="hamburger" aria-label="Abrir menú">
@@ -52,10 +54,14 @@
             <li><a href="#destacados">Destacados</a></li>
             <li><a href="#lookbook">Lookbook</a></li>
             <li><a href="#coleccion">Colección</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
         <span class="nav-fullscreen-footer">FUEL THE FLIGHT // EMPOWER THE CLAN</span>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════════════════ -->
     <section id="inicio" class="hero">
 
         <!-- SLIDES -->
@@ -77,15 +83,22 @@
             </div>
         </div>
 
+        <!-- Scanlines decorativos -->
+        <div class="hero-scanlines" aria-hidden="true"></div>
+
         <!-- Contenido central -->
         <div class="hero-content">
-            <h2 class="anim-titulo">DISCIPLINA<br>FUERZA<br>MENTALIDAD</h2>
+            <h2 class="anim-titulo">
+                <span class="glitch-word" data-text="DISCIPLINA">DISCIPLINA</span><br>
+                <span class="glitch-word" data-text="FUERZA">FUERZA</span><br>
+                <span class="glitch-word" data-text="MENTALIDAD">MENTALIDAD</span>
+            </h2>
             <p class="anim-subtitulo">Más que ropa deportiva. Una identidad.</p>
             <p class="hero-subtext">FUEL THE FLIGHT. EMPOWER THE CLAN.</p>
             <a href="#coleccion" class="btn btn-hero">Ver Colección</a>
         </div>
 
-        <!-- Flechas ocultas (navegación por drag/swipe y teclado) -->
+        <!-- Flechas ocultas (drag/swipe/teclado) -->
         <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Anterior" style="display:none;"></button>
         <button class="slider-btn slider-next" id="sliderNext" aria-label="Siguiente" style="display:none;"></button>
 
@@ -97,11 +110,50 @@
             <div class="slider-progress-bar" id="sliderProgressBar"></div>
         </div>
 
+        <!-- Scroll hint -->
+        <div class="hero-scroll-hint" aria-hidden="true">
+            <div class="scroll-mouse"></div>
+            <span>Scroll</span>
+        </div>
+
     </section>
 
-     <section id="destacados" class="seccion-premium-full">
-        <div class="liston-decorativo" style="width: 100%; grid-column: 1/-1;">
-            <span>NEW ARRIVALS // DROP 01</span>
+    <!-- ══════════════════════════════════════════════════════
+         TICKER ANIMADO
+    ══════════════════════════════════════════════════════ -->
+    <div class="ticker-wrap" aria-hidden="true">
+        <div class="ticker-track">
+            <span>DROP 01</span>
+            <span>HEAVY COTTON</span>
+            <span>JAPAN CLAN</span>
+            <span>OVERSIZE FIT</span>
+            <span>ENVÍOS MÉXICO</span>
+            <span>FUEL THE FLIGHT</span>
+            <span>EMPOWER THE CLAN</span>
+            <span>RAVEN KLAN</span>
+            <!-- repetición para loop sin corte -->
+            <span>DROP 01</span>
+            <span>HEAVY COTTON</span>
+            <span>JAPAN CLAN</span>
+            <span>OVERSIZE FIT</span>
+            <span>ENVÍOS MÉXICO</span>
+            <span>FUEL THE FLIGHT</span>
+            <span>EMPOWER THE CLAN</span>
+            <span>RAVEN KLAN</span>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         DESTACADOS / PREMIUM
+    ══════════════════════════════════════════════════════ -->
+    <section id="destacados" class="seccion-premium-full">
+        <div class="liston-decorativo animar" style="width:100%;grid-column:1/-1;">
+            <div class="liston-track">
+                <span>NEW ARRIVALS // DROP 01</span>
+                <span>NEW ARRIVALS // DROP 01</span>
+                <span>NEW ARRIVALS // DROP 01</span>
+                <span>NEW ARRIVALS // DROP 01</span>
+            </div>
         </div>
 
         <div class="grid-layout-dos-columnas">
@@ -128,11 +180,67 @@
             </div>
         </div>
 
-        <div class="liston-decorativo" style="width: 100%; grid-column: 1/-1;">
-            <span>RAVEN CLAN // HARD TRAINING.</span>
+        <div class="liston-decorativo animar" style="width:100%;grid-column:1/-1;">
+            <div class="liston-track">
+                <span>RAVEN CLAN // HARD TRAINING.</span>
+                <span>RAVEN CLAN // HARD TRAINING.</span>
+                <span>RAVEN CLAN // HARD TRAINING.</span>
+                <span>RAVEN CLAN // HARD TRAINING.</span>
+            </div>
         </div>
     </section>
 
+    <!-- ══════════════════════════════════════════════════════
+         STATS / NÚMEROS DE IMPACTO
+    ══════════════════════════════════════════════════════ -->
+    <!--
+    <section class="seccion-stats" id="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-numero" data-target="100">0<span class="stat-acento">%</span></span>
+                <span class="stat-label">Algodón premium</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-numero" data-target="01">01<span class="stat-acento"> DROP</span></span>
+                <span class="stat-label">Colección activa</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-numero" data-target="32">32<span class="stat-acento">+</span></span>
+                <span class="stat-label">Ciudades con envío</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-numero" data-target="24">24<span class="stat-acento">h</span></span>
+                <span class="stat-label">Respuesta por WA</span>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- ══════════════════════════════════════════════════════
+         FILOSOFÍA
+    ══════════════════════════════════════════════════════ -->
+    <section id="filosofia" class="filosofia filosofia-wrapper">
+        <h2>LA FILOSOFÍA RAVEN</h2>
+        <div class="linea-decorativa"></div>
+        <p>
+            Raven representa a quienes entrenan cuando nadie los ve.
+            A quienes entienden que la disciplina vale más que la motivación.
+            A quienes no buscan ser vistos, sino ser temidos por su constancia.
+        </p>
+        <blockquote class="filosofia-quote">
+            <p>"El cuervo no vuela para ser admirado. Vuela porque es su naturaleza. Así entrena el Clan."</p>
+            <cite>— RAVEN KLAN, DROP 01</cite>
+        </blockquote>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         LÍNEA DIVISORA ANIMADA
+    ══════════════════════════════════════════════════════ -->
+    <div class="linea-roja-anim" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CÓMO COMPRAR
+    ══════════════════════════════════════════════════════ -->
     <section id="como-comprar" class="como-comprar">
         <div class="seccion-encabezado">
             <h2>¿CÓMO COMPRAR?</h2>
@@ -145,14 +253,18 @@
                 <h3>ELIGE</h3>
                 <p>Explora la colección y selecciona tu prenda y talla.</p>
             </div>
-            <div class="paso-conector" aria-hidden="true"></div>
+            <div class="paso-conector" aria-hidden="true">
+                <div class="paso-conector-inner"></div>
+            </div>
             <div class="paso-card">
                 <span class="paso-numero">02</span>
                 <i class="fa-brands fa-whatsapp paso-icono"></i>
                 <h3>ESCRÍBENOS</h3>
                 <p>Confirma tu pedido por WhatsApp con un solo toque.</p>
             </div>
-            <div class="paso-conector" aria-hidden="true"></div>
+            <div class="paso-conector" aria-hidden="true">
+                <div class="paso-conector-inner"></div>
+            </div>
             <div class="paso-card">
                 <span class="paso-numero">03</span>
                 <i class="fa-solid fa-box-open paso-icono"></i>
@@ -162,40 +274,67 @@
         </div>
     </section>
 
-    <section id="filosofia" class="filosofia">
-        <h2>LA FILOSOFÍA RAVEN</h2>
-        <div class="linea-decorativa"></div>
-        <p>
-            Raven representa a quienes entrenan cuando nadie los ve.
-            A quienes entienden que la disciplina vale más que la motivación.
-            Cada prenda está diseñada para acompañarte en el proceso.
-        </p>
-    </section>
+    <!-- ══════════════════════════════════════════════════════
+         BARRA COMPRA SEGURA
+    ══════════════════════════════════════════════════════ -->
+    <div class="compra-segura" aria-label="Garantías de compra">
+        <div class="compra-segura-grid">
+            <div class="compra-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Compra segura</span>
+            </div>
+            <div class="compra-item">
+                <i class="fa-solid fa-truck-fast"></i>
+                <span>Envío a todo México</span>
+            </div>
+            <div class="compra-item">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Soporte por WhatsApp</span>
+            </div>
+            <div class="compra-item">
+                <i class="fa-solid fa-shirt"></i>
+                <span>Calidad garantizada</span>
+            </div>
+        </div>
+    </div>
 
-    <!-- Temporal
-    
-    <section id="lookbook" class="lookbook">
-        <div class="liston-decorativo">
-            <span>LOOKBOOK // VIDA REAL</span>
+    <!-- ══════════════════════════════════════════════════════
+         LOOKBOOK PLACEHOLDER (activar cuando haya imágenes)
+    ══════════════════════════════════════════════════════ -->
+    <!--
+    <section id="lookbook" class="lookbook-placeholder">
+        <div class="lp-header">
+            <h2>LOOKBOOK</h2>
+            <p>DROP 01 — Imágenes próximamente</p>
         </div>
-        <div class="lookbook-grid">
-            <div class="lookbook-item lookbook-grande" style="background-image: url('assets/lookbook-1.jpg');">
-                <div class="lookbook-overlay"></div>
+        <div class="lp-grid">
+            <div class="lp-item lp-grande">
+                <i class="fa-solid fa-camera lp-icon"></i>
+                <span class="lp-caption">COMING SOON</span>
             </div>
-            <div class="lookbook-item" style="background-image: url('assets/lookbook-2.jpg');">
-                <div class="lookbook-overlay"></div>
+            <div class="lp-item">
+                <i class="fa-solid fa-image lp-icon"></i>
+                <span class="lp-caption">DROP 01</span>
             </div>
-            <div class="lookbook-item" style="background-image: url('assets/lookbook-3.jpg');">
-                <div class="lookbook-overlay"></div>
+            <div class="lp-item">
+                <i class="fa-solid fa-image lp-icon"></i>
+                <span class="lp-caption">JAPAN CLAN</span>
             </div>
-            <div class="lookbook-item" style="background-image: url('assets/lookbook-4.jpg');">
-                <div class="lookbook-overlay"></div>
+            <div class="lp-item">
+                <i class="fa-solid fa-image lp-icon"></i>
+                <span class="lp-caption">HEAVY FIT</span>
+            </div>
+            <div class="lp-item">
+                <i class="fa-solid fa-image lp-icon"></i>
+                <span class="lp-caption">KLAN WEAR</span>
             </div>
         </div>
-    </section>   
-    
+    </section>
     -->
 
+    <!-- ══════════════════════════════════════════════════════
+         COLECCIÓN / PRODUCTOS
+    ══════════════════════════════════════════════════════ -->
     <section id="coleccion" class="productos">
         <div class="seccion-encabezado">
             <h2>COLECCIÓN</h2>
@@ -218,6 +357,9 @@
         </button>
     </section>
 
+    <!-- ══════════════════════════════════════════════════════
+         MODAL GUÍA DE TALLAS
+    ══════════════════════════════════════════════════════ -->
     <div id="modalTallas" class="modal-overlay">
         <div class="modal-content modal-tallas-content">
             <span class="close-modal" onclick="cerrarModalTallas()">&times;</span>
@@ -245,30 +387,70 @@
         </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════
+         TESTIMONIOS
+    ══════════════════════════════════════════════════════ -->
     <section id="testimonios" class="testimonios">
         <div class="seccion-encabezado">
             <h2>EL KLAN HABLA</h2>
-            <p><!--Comentario para los clientes--></p>
+            <p>Los primeros en vestir RAVEN</p>
         </div>
 
-    <!--COMENTARIOS DE CLIENTES-->
         <div class="testimonios-grid">
             <div class="testimonio-card">
-                <div class="estrellas"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p class="testimonio-texto">"Se el primero en ser parte del clan"</p>
-                <span class="testimonio-autor"></span>
+                <div class="testimonio-header">
+                    <div class="testimonio-avatar">R</div>
+                    <div class="testimonio-meta">
+                        <span class="testimonio-nombre">Raven Klan</span>
+                        <span class="testimonio-fecha">DROP 01 — 2026</span>
+                    </div>
+                </div>
+                <div class="estrellas">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonio-texto">"Sé el primero en ser parte del clan."</p>
+                <span class="testimonio-autor">— PRIMER MIEMBRO</span>
             </div>
-            
+
+            <!-- Tarjeta CTA para reseñas -->
+            <div class="testimonio-card" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;border-style:dashed;border-color:#1f1f1f;">
+                <i class="fa-brands fa-instagram" style="font-size:1.6rem;color:#333;"></i>
+                <p style="color:#444;font-size:0.82rem;text-align:center;line-height:1.6;">
+                    ¿Ya tienes tu prenda RAVEN?<br>Comparte tu foto y etiquétanos.
+                </p>
+                <a href="https://www.instagram.com/ravenkklan" target="_blank" class="btn-cta-ig" style="padding:10px 22px;font-size:0.85rem;">
+                    <i class="fa-brands fa-instagram"></i> @RAVENKKLAN
+                </a>
+            </div>
         </div>
     </section>
 
-    <section id="contacto" class="contacto">
-        <div style="text-align: center; padding: 60px 20px;">
-            <h2 style="font-family: 'Bebas Neue'; font-size: 3rem; letter-spacing: 3px;">ÚNETE AL KLAN</h2>
+    <!-- ══════════════════════════════════════════════════════
+         ÚNETE AL KLAN (contacto mejorado)
+    ══════════════════════════════════════════════════════ -->
+    <section id="contacto" class="join-klan">
+        <div class="join-klan-inner">
+            <span class="join-eyebrow">Torreón, Coahuila — México</span>
+            <h2 class="join-titulo">ÚNETE<br>AL KLAN</h2>
+            <p class="join-subtitulo">
+                No es solo ropa. Es una decisión.<br>
+                Escríbenos y consigue tu drop antes de que se agote.
+            </p>
+            <div class="join-ctas">
+                <a href="https://wa.me/5218714701253?text=Hola%20RAVEN%2C%20quiero%20ser%20parte%20del%20Klan." target="_blank" class="btn-cta-wa">
+                    <i class="fa-brands fa-whatsapp"></i> Escríbenos
+                </a>
+                <a href="https://www.instagram.com/ravenkklan" target="_blank" class="btn-cta-ig">
+                    <i class="fa-brands fa-instagram"></i> Síguenos
+                </a>
+            </div>
         </div>
     </section>
 
-   <footer class="footer-klan">
+    <!-- ══════════════════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════════════════ -->
+    <footer class="footer-klan">
         <div class="footer-container">
             <div class="footer-col col-marca">
                 <h2 class="footer-logo">RAVEN</h2>
@@ -315,6 +497,9 @@
         </div>
     </footer>
 
+    <!-- ══════════════════════════════════════════════════════
+         MODAL PRODUCTO
+    ══════════════════════════════════════════════════════ -->
     <div id="modal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal" onclick="cerrarModal()">&times;</span>
@@ -345,10 +530,64 @@
         </div>
     </div>
 
-<a href="https://wa.me/5218714701253" class="whatsapp-flotante" target="_blank">
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/5218714701253" class="whatsapp-flotante" target="_blank" aria-label="Contáctanos por WhatsApp">
         <i class="fab fa-whatsapp"></i>
-</a>
+    </a>
 
     <script src="js/script.js"></script>
+    <!-- ► NUEVO: JS extra para stats counter + mejoras -->
+    <script>
+    // ─── COUNTER-UP PARA STATS ────────────────────────────────
+    (function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                el.classList.add('contado');
+                observer.unobserve(el);
+            });
+        }, { threshold: 0.6 });
+
+        document.querySelectorAll('.stat-numero[data-target]').forEach(el => {
+            observer.observe(el);
+        });
+    })();
+
+    // ─── SCROLL REVEAL EXTRAS ─────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof ScrollReveal === 'undefined') return;
+        const sr = ScrollReveal();
+
+        sr.reveal('.stat-item', {
+            origin: 'bottom', distance: '25px',
+            duration: 700, interval: 100
+        });
+        sr.reveal('.lp-item', {
+            origin: 'bottom', distance: '20px',
+            duration: 600, interval: 80
+        });
+        sr.reveal('.join-titulo', {
+            origin: 'bottom', distance: '40px',
+            duration: 900
+        });
+        sr.reveal('.join-subtitulo', {
+            origin: 'bottom', distance: '20px',
+            duration: 700, delay: 200
+        });
+        sr.reveal('.join-ctas', {
+            origin: 'bottom', distance: '20px',
+            duration: 700, delay: 350
+        });
+        sr.reveal('.compra-item', {
+            origin: 'bottom', distance: '15px',
+            duration: 500, interval: 80
+        });
+        sr.reveal('.testimonio-card', {
+            origin: 'bottom', distance: '30px',
+            duration: 700, interval: 150
+        });
+    });
+    </script>
 </body>
 </html>
